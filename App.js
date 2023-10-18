@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, PermissionsAndroid, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
@@ -7,14 +7,24 @@ export default function App() {
       <Text>Open up App.js to start working on your app!</Text>
       <Text>Here's another text</Text>
       <Text>Also another</Text>
-      <Button title="Request Permission" onPress={sayHello}/>
+      <Button title="Request Permission" onPress={requestCameraPermission}/>
       <StatusBar style="auto" />
     </View>
   );
 }
 
-const sayHello = () => {
-  alert("Hello there! How are you?")
+const requestCameraPermission = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: "Can I open the camera for fun?",
+        message: "It is for testing the code, plzzzzz"
+      }
+    )
+  } catch (error) {
+    
+  }
 }
 
 const styles = StyleSheet.create({
